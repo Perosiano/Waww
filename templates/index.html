@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Filter App</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        .container { max-width: 500px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 10px; }
+        img { max-width: 100%; margin-top: 20px; border-radius: 5px; }
+        select, input { margin: 10px 0; padding: 10px; width: 100%; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Aplikasi Filter Gambar</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <select name="filter">
+                <option value="grayscale">Hitam Putih (Grayscale)</option>
+                <option value="sepia">Sepia (Klasik)</option>
+                <option value="blur">Blur</option>
+            </select>
+            <button type="submit">Unggah & Terapkan Filter</button>
+        </form>
+
+        {% if filename %}
+            <h3>Hasil:</h3>
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Hasil Filter">
+            <br>
+            <a href="{{ url_for('static', filename='uploads/' + filename) }}" download>Unduh Gambar</a>
+        {% endif %}
+    </div>
+</body>
+</html>
